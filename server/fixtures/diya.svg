@@ -1,0 +1,30 @@
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 800 1000" role="img" aria-label="Illustration: brass diya oil lamp (fixture)">
+  <defs>
+    <linearGradient id="brass" x1="0" x2="1">
+      <stop offset="0" stop-color="#8a5a12"/>
+      <stop offset=".45" stop-color="#e3b04b"/>
+      <stop offset=".7" stop-color="#f6d98b"/>
+      <stop offset="1" stop-color="#9c6a1a"/>
+    </linearGradient>
+    <radialGradient id="glow" cx=".5" cy=".5" r=".5">
+      <stop offset="0" stop-color="#ffd27a" stop-opacity=".55"/>
+      <stop offset="1" stop-color="#ffd27a" stop-opacity="0"/>
+    </radialGradient>
+  </defs>
+  <rect width="800" height="1000" fill="#e9e1d1"/>
+  <ellipse cx="400" cy="380" rx="230" ry="230" fill="url(#glow)"/>
+  <ellipse cx="400" cy="790" rx="230" ry="26" fill="#cbbfa6"/>
+  <path d="M250 760c30-40 270-40 300 0l-20 28H270z" fill="url(#brass)"/>
+  <g fill="url(#brass)">
+    <path d="M300 760c-10-50 20-80 40-90 0 40 20 70 60 90z"/>
+    <path d="M500 760c10-50-20-80-40-90 0 40-20 70-60 90z"/>
+    <path d="M400 760c-40-30-40-80 0-110 40 30 40 80 0 110z"/>
+  </g>
+  <rect x="380" y="560" width="40" height="110" fill="url(#brass)"/>
+  <path d="M220 520c40 70 320 70 360 0-40-20-320-20-360 0z" fill="url(#brass)"/>
+  <path d="M560 515c40-10 70 0 80 10-30 8-50 10-80 4z" fill="url(#brass)"/>
+  <ellipse cx="400" cy="518" rx="178" ry="22" fill="#5a3a0c"/>
+  <path d="M628 520c-6-40 4-70 22-96 14 30 18 60 2 96z" fill="#f08a24"/>
+  <path d="M634 520c-2-22 4-40 14-54 6 18 8 36 0 54z" fill="#ffe08a"/>
+  <path d="M330 720c20 6 40 8 70 8" stroke="#6b4a12" stroke-width="3" fill="none" opacity=".4"/>
+</svg>

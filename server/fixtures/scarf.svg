@@ -1,0 +1,20 @@
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 800 1000" role="img" aria-label="Illustration: block-printed cotton scarf (fixture)">
+  <defs>
+    <pattern id="buta" width="80" height="90" patternUnits="userSpaceOnUse">
+      <rect width="80" height="90" fill="#f3ead8"/>
+      <path d="M40 18c14 0 20 16 10 28-6 8-18 10-18 22 0 4 3 8 8 8-12 2-20-8-18-20 2-14 18-14 18-26 0-6-4-10-10-12z" fill="#2a3a6b"/>
+      <circle cx="40" cy="30" r="3.5" fill="#b4432e"/>
+      <path d="M0 45h8M72 45h8" stroke="#b4432e" stroke-width="3"/>
+    </pattern>
+  </defs>
+  <rect width="800" height="1000" fill="#e9e1d1"/>
+  <g transform="rotate(-4 400 500)">
+    <path d="M210 90h380l-20 820H230z" fill="url(#buta)" stroke="#d8ccb5" stroke-width="2"/>
+    <path d="M210 90h28l-8 820h-0z" fill="#b4432e"/>
+    <path d="M562 90h28l-20 820h-16z" fill="#b4432e"/>
+    <ellipse cx="236" cy="520" rx="16" ry="26" fill="#b4432e" opacity=".35"/>
+    <g stroke="#e9e1d1" stroke-width="2" opacity=".6">
+      <path d="M232 910l-4 30M260 910l-3 30M290 910l-2 30M320 910v30M350 910v30M380 910v30M410 910v30M440 910v30M470 910l2 30M500 910l3 30M530 910l4 30M560 910l4 30"/>
+    </g>
+  </g>
+</svg>

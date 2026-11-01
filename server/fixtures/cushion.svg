@@ -1,0 +1,15 @@
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 800 1000" role="img" aria-label="Illustration: kantha-stitched cushion cover (fixture)">
+  <defs>
+    <pattern id="stitch" width="24" height="22" patternUnits="userSpaceOnUse">
+      <path d="M2 11h12" stroke="#f3ead8" stroke-width="3" stroke-linecap="round"/>
+    </pattern>
+  </defs>
+  <rect width="800" height="1000" fill="#e9e1d1"/>
+  <ellipse cx="400" cy="810" rx="290" ry="28" fill="#cbbfa6"/>
+  <path d="M130 250c90-20 450-20 540 0 20 180 20 370 0 550-90 20-450 20-540 0-20-180-20-370 0-550z" fill="#b4432e"/>
+  <path d="M130 250c90-20 450-20 540 0 6 60 10 120 12 180H118c2-60 6-120 12-180z" fill="#c8693a"/>
+  <path d="M118 600h564c-2 70-6 140-12 200-90 20-450 20-540 0-6-60-10-130-12-200z" fill="#2a3a6b"/>
+  <path d="M130 250c90-20 450-20 540 0 20 180 20 370 0 550-90 20-450 20-540 0-20-180-20-370 0-550z" fill="url(#stitch)" opacity=".7"/>
+  <rect x="300" y="430" width="200" height="170" fill="#d9a441" opacity=".85"/>
+  <rect x="300" y="430" width="200" height="170" fill="url(#stitch)" opacity=".6"/>
+</svg>

@@ -1,0 +1,18 @@
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 800 1000" role="img" aria-label="Illustration: Jaipur blue pottery bowl (fixture)">
+  <rect width="800" height="1000" fill="#e9e1d1"/>
+  <ellipse cx="400" cy="740" rx="250" ry="30" fill="#cbbfa6"/>
+  <path d="M140 420c0 190 120 320 260 320s260-130 260-320z" fill="#f7f4ec"/>
+  <path d="M140 420c0 190 120 320 260 320s260-130 260-320z" fill="none" stroke="#1d4f91" stroke-width="10"/>
+  <ellipse cx="400" cy="420" rx="260" ry="60" fill="#f7f4ec" stroke="#1d4f91" stroke-width="10"/>
+  <ellipse cx="400" cy="424" rx="230" ry="44" fill="#e6efe9"/>
+  <g fill="#1d4f91">
+    <path d="M250 560c-20-30 0-60 30-60-10 20 0 40 20 50-20 0-30 6-50 10z"/>
+    <path d="M400 620c-30-30-30-70 0-90 30 20 30 60 0 90z"/>
+    <path d="M550 560c20-30 0-60-30-60 10 20 0 40-20 50 20 0 30 6 50 10z"/>
+  </g>
+  <g fill="#3aa0a4">
+    <circle cx="320" cy="600" r="14"/><circle cx="480" cy="600" r="14"/><circle cx="400" cy="680" r="12"/>
+    <path d="M330 520c10 14 30 14 40 0M430 520c10 14 30 14 40 0" stroke="#3aa0a4" stroke-width="6" fill="none"/>
+  </g>
+  <path d="M600 384l14-6 6 14-12 4z" fill="#c9b99a"/>
+</svg>
