@@ -1,0 +1,33 @@
+# Render Blueprint: ONE web service (Express serves the API and the built React app).
+# Secrets use `sync: false`: Render asks you for their values in the dashboard; they are never stored here.
+services:
+  - type: web
+    name: film-to-export
+    runtime: node
+    plan: free
+    region: singapore            # close to a Neon database in ap-southeast-1; pick the region nearest your DB
+    buildCommand: npm ci --include=dev && npm run build
+    startCommand: npm start
+    healthCheckPath: /api/health
+    autoDeploy: true
+    envVars:
+      - key: NODE_VERSION
+        value: "24"
+      - key: DATABASE_URL         # Neon/Supabase Postgres connection string (TLS)
+        sync: false
+      - key: GEMINI_API_KEY       # Google AI Studio key
+        sync: false
+      - key: GEMINI_MODEL
+        value: gemini-2.5-flash
+      - key: GEMINI_FALLBACK_MODEL
+        value: gemini-3.5-flash-lite
+      - key: PAYPAL_CLIENT_ID     # PayPal SANDBOX app client id (public)
+        sync: false
+      - key: PAYPAL_CLIENT_SECRET # PayPal SANDBOX app secret (server-only)
+        sync: false
+      - key: PAYPAL_CREATE_INVOICE
+        value: "false"
+      - key: BUYER_LANGUAGE
+        value: es
+      - key: APP_PUBLIC_URL       # e.g. https://film-to-export.onrender.com (set after the first deploy)
+        sync: false
