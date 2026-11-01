@@ -1,0 +1,11 @@
+node_modules/
+dist/
+data/
+# Sample footage (AI-generated test clips) stays out of the repo by default.
+demo-media/
+.env
+.env.*
+!.env.example
+*.log
+.DS_Store
+coverage/
