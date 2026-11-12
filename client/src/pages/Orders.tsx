@@ -61,8 +61,6 @@ export default function Orders() {
 }
 
 function OrderGrid({ orders, onUpdate }: { orders: Order[]; onUpdate: (o: Order) => void }) {
-  if (orders.length === 0) return null;
-
   const colDefs = useMemo<ColDef<Order>[]>(() => [
     {
       field: "id",
@@ -138,6 +136,8 @@ function OrderGrid({ orders, onUpdate }: { orders: Order[]; onUpdate: (o: Order)
       },
     },
   ], [onUpdate]);
+
+  if (orders.length === 0) return null;
 
   return (
     <div className="ag-theme-quartz" style={{ height: Math.min(480, Math.max(220, (orders.length + 1) * 55)), width: "100%", borderRadius: 6, overflow: "hidden" }}>
