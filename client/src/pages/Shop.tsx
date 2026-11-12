@@ -11,9 +11,11 @@ interface ShopData {
 
 export default function Shop() {
   const [data, setData] = useState<ShopData | null>(null);
+  const [error, setError] = useState<string | null>(null);
   useEffect(() => {
-    api<ShopData>("/shop").then(setData);
+    api<ShopData>("/shop").then(setData).catch((e: Error) => setError(e.message));
   }, []);
+  if (error) return <div className="page"><p className="error">{error}</p></div>;
   if (!data) return <div className="page"><Spinner label="Loading the shop…" /></div>;
 
   return (
@@ -39,7 +41,7 @@ export default function Shop() {
           {data.items.map((it, i) => (
             <Link to={`/shop/${it.id}`} key={it.id} className={`cat-card${it.status === "sold_out" ? " sold" : ""}`}>
               <div className="cat-img">
-                {it.imageUrl && <img src={it.imageUrl} alt={it.titleEn} loading="lazy" />}
+                {it.imageUrl && <img src={it.imageUrl} alt={it.titleEn} loading="lazy" onError={(e) => { (e.target as HTMLImageElement).style.display = "none"; }} />}
                 {it.status === "sold_out" && <span className="sold-stamp">Sold</span>}
               </div>
               <div className="cat-meta">

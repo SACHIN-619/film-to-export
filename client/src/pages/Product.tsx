@@ -63,7 +63,7 @@ export default function Product({ variant = "shop" }: { variant?: "shop" | "pay"
       )}
       <div className="product-grid">
         <figure className="product-img">
-          {item.imageUrl && <img src={item.imageUrl} alt={item.titleEn} />}
+          {item.imageUrl && <img src={item.imageUrl} alt={item.titleEn} onError={(e) => { (e.target as HTMLImageElement).style.display = "none"; }} />}
           {item.origin === "fixture" && <figcaption><FixtureTag /> Illustration</figcaption>}
         </figure>
 
