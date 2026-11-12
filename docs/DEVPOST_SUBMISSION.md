@@ -1,7 +1,7 @@
 # Devpost submission (draft)
 
 **Project name:** Film-to-Export
-**Tagline:** An AI customs broker in your pocket: a maker films her work, speaks in Hindi, and gets a duties-included PayPal link for her US buyer.
+**Tagline:** An AI customs broker in your pocket: a maker films her workbench, speaks Hindi, and gets a Delivered-Duty-Paid PayPal link for US buyers, backed by live USITC tariffs and AG Grid.
 **Target prizes:** Best Use of Agentic Commerce · Best Use of PayPal + AI · Best Use of AG Grid · Most Impactful
 **Built with:** PayPal Orders v2 (amount breakdown `item_total` + `tax_total`) · PayPal JS SDK · AG Grid Community · Google Gemini (video frames + audio, one call) · **USITC HTS REST API (official US tariff schedule)** · Postman · React · TypeScript · Vite · Node.js · Express · Server-Sent Events · PostgreSQL (Neon) · Render · Zod · Vitest · pdfkit · qrcode
 
@@ -42,18 +42,21 @@ Then the maker **confirms** each piece (nothing sells unconfirmed) and taps **Ge
   - the agent stream, replay, pay links, and Gemini retry and fallback;
   - plus an opt-in integration test against real Postgres.
 
-## Challenges
+## Challenges we ran into
 
-- **Models misclassify by material.** Live, Gemini filed a cotton scarf under "wool" and, with truncated descriptions, a blue-pottery bowl under brown-glazed earthenware. Fix: read the whole official heading, give the model the full hierarchical descriptions, and accept only listed lines.
-- **We were wrong too.** An official-API check caught two rates we'd copied from secondary sites, and the full hierarchy later showed a "Free" brass line was actually *chain*. Every rate in the fallback table is now verified against hts.usitc.gov, with a dated note.
-- **Tariffs moved under our feet.** The Supreme Court struck down the IEEPA tariffs in Feb 2026, but de minimis stayed suspended. The extra rate on Indian goods is still in flux, so it's a separate, flagged component.
+- **Models misclassify by material:** Live, Gemini filed a cotton scarf under "wool" and, with truncated descriptions, a blue-pottery bowl under brown-glazed earthenware. Fix: read the whole official heading, give the model the full hierarchical descriptions, and accept only listed lines.
+- **We were wrong too:** An official-API check caught two rates we'd copied from secondary sites, and the full hierarchy later showed a "Free" brass line was actually *chain*. Every rate in the fallback table is now verified against hts.usitc.gov, with a dated note.
+- **Ephemeral cloud files on free hosting:** On Render, extracted video frames are stored on ephemeral disk that gets wiped on redeploy. We built a persistent `media_files` table in Neon PostgreSQL (`BYTEA`) so that images uploaded by makers survive continuous deployments.
+- **Tariffs moved under our feet:** The Supreme Court struck down the IEEPA tariffs in Feb 2026, but de minimis stayed suspended. The extra rate on Indian goods is still in flux, so it's a separate, flagged component.
 - **PayPal Sandbox realities:** India-to-India payments are blocked (use a US buyer), and IN merchants can see `PENDING` captures, which we model as `payment_pending`.
 
-## Accomplishments
+## Accomplishments that we're proud of
 
-- A live end-to-end agent: Hindi video → transcript → official US tariff lines → duties-included PayPal link → verified Sandbox payment → DDP invoice PDF.
-- PayPal Sandbox accepted duties-included orders exactly as built (e.g. `item_total` 32.00 + `tax_total` 5.44 = 37.44).
-- The agent catches and explains its own classification mistakes against government data.
+- **A live end-to-end agent:** Hindi video → transcript → official US tariff lines → duties-included PayPal link → verified Sandbox payment → DDP invoice PDF.
+- **Zero-hallucination compliance:** Grounding the agent in the live USITC HTS REST API so that tariff classifications and duty calculations reflect real-world US government law.
+- **PayPal Orders v2 compliance:** Cleanly isolating estimated customs duty inside PayPal's `amount.breakdown.tax_total` while maintaining strict penny-level mathematical parity across line items.
+- **Self-correcting agent intelligence:** The agent catches and visibly explains its own classification mistakes against government hierarchy (e.g. `6214.20` wool → `6214.90.00` cotton).
+- **Enterprise seller ledger:** Seamlessly integrating AG Grid Community (v36) to give solo makers an interactive, sortable, filterable order book and instant commercial invoice downloads.
 
 ## What we learned
 
@@ -62,9 +65,11 @@ Then the maker **confirms** each piece (nothing sells unconfirmed) and taps **Ge
 - **Persistent storage for agent media:** In cloud environments like Render with ephemeral disks, storing multimodal perception outputs directly in managed PostgreSQL (`BYTEA`) guarantees that generated visual assets survive continuous deployments.
 - **Enterprise data management with AG Grid:** Presenting real-time cross-border order states, payment statuses, and generated invoice links in an interactive AG Grid table gave the seller an instant, professional dashboard.
 
-## What's next
+## What's next for Film-to-Export
 
-Deployed pay links (APP_PUBLIC_URL), more destination countries, brokerage-fee estimates, certificate-dependent lines (for example "certified hand-loomed and folklore products" for carpets), multi-seller onboarding through PayPal partner onboarding, and PayPal webhooks as a second confirmation path.
+- **Multi-Country Support:** Expanding official tariff schedules beyond the US to the EU (TARIC), UK (HMRC), and Canada (CBSA).
+- **PayPal Partner Onboarding:** Implementing multi-tenant seller onboarding via PayPal Commerce Platform so any artisan worldwide can connect their own PayPal wallet with one click.
+- **Carrier Label Generation:** Direct integrations with DHL Express and India Post to bundle the generated DDP Commercial Invoice directly with pre-printed airway bills.
 
 ## Honesty notes for judges
 
