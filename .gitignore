@@ -9,3 +9,9 @@ demo-media/
 *.log
 .DS_Store
 coverage/
+
+# Local docs and planning (kept local, not pushed to GitHub)
+docs/
+.claude/
+fix_char.cjs
+fix_char.mjs
