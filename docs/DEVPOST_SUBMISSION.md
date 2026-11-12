@@ -2,8 +2,8 @@
 
 **Project name:** Film-to-Export
 **Tagline:** An AI customs broker in your pocket: a maker films her work, speaks in Hindi, and gets a duties-included PayPal link for her US buyer.
-**Target prizes:** Best Use of Agentic Commerce · Best Use of PayPal + AI · Most Impactful
-**Built with:** PayPal Orders v2 (amount breakdown `item_total` + `tax_total`) · PayPal JS SDK · Google Gemini (video frames + audio, one call) · **USITC HTS REST API (official US tariff schedule)** · React · TypeScript · Vite · Node.js · Express · Server-Sent Events · PostgreSQL (Neon) · Zod · Vitest · pdfkit · qrcode
+**Target prizes:** Best Use of Agentic Commerce · Best Use of PayPal + AI · Best Use of AG Grid · Most Impactful
+**Built with:** PayPal Orders v2 (amount breakdown `item_total` + `tax_total`) · PayPal JS SDK · AG Grid Community · Google Gemini (video frames + audio, one call) · **USITC HTS REST API (official US tariff schedule)** · Postman · React · TypeScript · Vite · Node.js · Express · Server-Sent Events · PostgreSQL (Neon) · Render · Zod · Vitest · pdfkit · qrcode
 
 ## Inspiration
 
@@ -57,7 +57,10 @@ Then the maker **confirms** each piece (nothing sells unconfirmed) and taps **Ge
 
 ## What we learned
 
-_TODO: notes on grounding agents in official data, PayPal amount breakdown rules, de minimis and DDP._
+- **Grounding AI agents in authoritative government data is essential:** Large models hallucinate tariff codes when relying solely on memory. By querying the live USITC REST API for the full heading and then having Gemini pick exclusively from the official lines, the agent eliminated hallucinated duties and successfully self-corrected classifications.
+- **PayPal Orders v2 requires strict amount breakdowns:** Since PayPal lacks a dedicated duty field, packing duties into `tax_total` while matching line-item totals is the cleanest compliant way to present Delivered Duty Paid (DDP) pricing to international buyers without surprise fees.
+- **Persistent storage for agent media:** In cloud environments like Render with ephemeral disks, storing multimodal perception outputs directly in managed PostgreSQL (`BYTEA`) guarantees that generated visual assets survive continuous deployments.
+- **Enterprise data management with AG Grid:** Presenting real-time cross-border order states, payment statuses, and generated invoice links in an interactive AG Grid table gave the seller an instant, professional dashboard.
 
 ## What's next
 
@@ -71,8 +74,10 @@ Deployed pay links (APP_PUBLIC_URL), more destination countries, brokerage-fee e
 
 ## Links
 
-- Repo: _TODO_ (public, MIT)
-- Demo video (<3 min): _TODO_
+- **Hosted Live Demo:** https://film-to-export.onrender.com
+- **Public GitHub Repository:** https://github.com/SACHIN-619/film-to-export (MIT Licensed)
+- **Postman API Collection:** Included in repository root (`postman_collection.json`)
+- **Demo Video (<3 min):** _TODO: Add your YouTube / Loom link here_
 
 ## Testing instructions for judges
 
