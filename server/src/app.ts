@@ -30,6 +30,8 @@ import QRCode from "qrcode";
 import { OrderService } from "./services/orders.js";
 import { getInvoice, renderInvoicePdf } from "./services/invoices.js";
 import { prepareBatch, replayRun, runBroker, type BrokerEvent } from "./broker/agent.js";
+import { randomBytes } from "node:crypto";
+import { nowIso } from "./db.js";
 import { LiveTariffLookup, type TariffLookup } from "./broker/tariff.js";
 
 export interface AppDeps {
@@ -46,6 +48,16 @@ const AUDIO_MIME = /^audio\/(webm|ogg|mpeg|mp3|mp4|m4a|x-m4a|aac|wav|x-wav|flac|
 
 const IMAGE_MIME = new Set(["image/jpeg", "image/png", "image/webp"]);
 const MAX_PHOTOS = 8;
+
+/** Persist an image to Postgres so it survives Render's ephemeral disk. */
+async function storeMedia(db: Db, batchId: string, publicPath: string, mime: string, data: Buffer) {
+  const filename = path.basename(publicPath);
+  const id = `mf_${randomBytes(6).toString("base64url")}`;
+  await db.run(
+    "INSERT INTO media_files (id, batch_id, filename, mime_type, data, created_at) VALUES ($1, $2, $3, $4, $5, $6) ON CONFLICT (batch_id, filename) DO NOTHING",
+    [id, batchId, filename, mime, data, nowIso()],
+  );
+}
 
 export function createApp(deps: AppDeps) {
   const { db, config, payments, vision } = deps;
@@ -69,7 +81,20 @@ export function createApp(deps: AppDeps) {
   // Behind Render/other proxies: honour X-Forwarded-Proto so pay links are https://.
   app.set("trust proxy", true);
   app.use(express.json({ limit: "200kb" }));
-  app.use("/media", express.static(uploadsDir, { fallthrough: false, maxAge: "1h" }));
+  // Serve images: try disk first (fast, local dev), fall back to Postgres (Render's ephemeral disk).
+  app.use("/media", express.static(uploadsDir, { fallthrough: true, maxAge: "1h" }));
+  app.get("/media/:batchId/:filename", async (req, res, next) => {
+    try {
+      const row = await db.get<{ mime_type: string; data: Buffer }>(
+        "SELECT mime_type, data FROM media_files WHERE batch_id = $1 AND filename = $2",
+        [req.params.batchId, req.params.filename],
+      );
+      if (!row) { res.status(404).json({ error: "Image not found" }); return; }
+      res.setHeader("Content-Type", row.mime_type);
+      res.setHeader("Cache-Control", "public, max-age=3600");
+      res.send(row.data);
+    } catch (err) { next(err); }
+  });
   app.use("/fixtures", express.static(path.resolve("server/fixtures"), { fallthrough: false }));
 
   const api = express.Router();
@@ -162,6 +187,8 @@ export function createApp(deps: AppDeps) {
       await addFrames(db, batchId, publicPaths.map((p, i) => ({ path: p, mime: mimeOf(framePaths[i]) })));
 
       const images = framePaths.map((f) => ({ mime: mimeOf(f), data: fs.readFileSync(f) }));
+      // Persist images to Postgres so they survive Render's ephemeral disk
+      await Promise.all(images.map((img, i) => storeMedia(db, batchId, publicPaths[i], img.mime, img.data)));
       const altName = LANGUAGE_NAMES[config.buyerLanguage] ?? config.buyerLanguage;
       const { draft, repaired } = await draftListings(vision, images, altName);
       await insertDraftItems(db, batchId, draft, { origin: "ai", altLang: config.buyerLanguage, framePaths: publicPaths, repaired });
@@ -259,6 +286,8 @@ export function createApp(deps: AppDeps) {
         return { mime: p.mimetype, data: fs.readFileSync(path.join(batchDir, name)), publicPath: `/media/${batchId}/${name}` };
       });
       await addFrames(db, batchId, images.map((i) => ({ path: i.publicPath, mime: i.mime })));
+      // Persist images to Postgres so they survive Render's ephemeral disk
+      await Promise.all(images.map((img) => storeMedia(db, batchId, img.publicPath, img.mime, img.data)));
       let audio: { mime: string; data: Buffer } | null = null;
       if (voice) {
         const dest = path.join(batchDir, `voice${path.extname(voice.originalname) || ".webm"}`);
