@@ -1,0 +1,111 @@
+{
+  "destination": "US",
+  "checked_on": "2026-10-31",
+  "disclaimer": "Estimate, not customs advice. Rates change; the importer of record is responsible for final classification and duty. Verify every line at https://hts.usitc.gov before relying on it.",
+  "not_included": "Carrier brokerage/clearance fees, merchandise processing fees and state sales tax are not included.",
+  "origin_surcharges": {
+    "IN": {
+      "rate_pct": 10,
+      "label": "Additional US tariff on India-origin goods",
+      "status": "uncertain",
+      "note": "After the Supreme Court struck down the IEEPA tariffs (Learning Resources v. Trump, Feb 20 2026), India's IEEPA rate (up to 50%) stopped being collected. Secondary sources report a temporary Section 122 rate of 10% and, from Jul 24 2026, about 10% on top of normal duty, but they conflict. Re-check before shipping.",
+      "sources": [
+        "https://geodis.com/us-en/resources/customs-corner/supreme-court-decides-ieepa-tariffs-not-legal",
+        "https://www.newsonair.gov.in/white-house-says-india-to-face-temporary-10-per-cent-tariff-after-new-us-order",
+        "https://www.tariffstool.com/tariffs-from-india"
+      ]
+    }
+  },
+  "headings": [
+    {
+      "hs": "6214.90",
+      "hts_line": "6214.90.00",
+      "description": "Shawls, scarves, mufflers, veils: of other textile materials (incl. cotton)",
+      "mfn_rate_pct": 11.3,
+      "verified": true,
+      "sources": [
+        "https://hts.usitc.gov/reststop/search?keyword=6214.90.00"
+      ],
+      "note": "Confirmed via the official USITC HTS API on 2026-10-31: General 11.3%."
+    },
+    {
+      "hs": "6912.00",
+      "hts_line": "6912.00.48",
+      "description": "Ceramic tableware/kitchenware, other than porcelain: household, other",
+      "mfn_rate_pct": 9.8,
+      "verified": true,
+      "sources": [
+        "https://hts.usitc.gov/reststop/search?keyword=6912.00.48"
+      ],
+      "note": "Confirmed via the official USITC HTS API on 2026-10-31: General 9.8%. Sister lines 6912.00.35-.44 (sets, value bands) carry different rates."
+    },
+    {
+      "hs": "6913.90",
+      "hts_line": "6913.90.50",
+      "description": "Statuettes and other ornamental ceramic articles: other",
+      "mfn_rate_pct": 6,
+      "verified": true,
+      "sources": [
+        "https://hts.usitc.gov/reststop/search?keyword=6913.90.50"
+      ],
+      "note": "Confirmed via the official USITC HTS API on 2026-10-31: General 6%."
+    },
+    {
+      "hs": "6304.92",
+      "hts_line": "6304.92.00",
+      "description": "Other furnishing articles (e.g. cushion covers), not knitted, of cotton",
+      "mfn_rate_pct": 6.3,
+      "verified": true,
+      "sources": [
+        "https://hts.usitc.gov/reststop/search?keyword=6304.92.00"
+      ],
+      "note": "Confirmed via the official USITC HTS API on 2026-10-31: General 6.3%."
+    },
+    {
+      "hs": "6307.90",
+      "hts_line": "6307.90.98",
+      "description": "Other made-up textile articles: other",
+      "mfn_rate_pct": 7,
+      "verified": true,
+      "sources": [
+        "https://hts.usitc.gov/reststop/search?keyword=6307.90.98"
+      ],
+      "note": "Confirmed via the official USITC HTS API on 2026-10-31: General 7%."
+    },
+    {
+      "hs": "9405.50",
+      "hts_line": "9405.50.40",
+      "description": "Non-electrical luminaires and lighting fittings (e.g. oil lamps): other",
+      "mfn_rate_pct": 6,
+      "verified": true,
+      "sources": [
+        "https://hts.usitc.gov/reststop/search?keyword=9405.50.40"
+      ],
+      "note": "Confirmed via the official USITC HTS API on 2026-10-31: General 6%. Other 9405.50 lines may apply to specific lamp types."
+    },
+    {
+      "hs": "7419.80",
+      "hts_line": "7419.80.09",
+      "description": "Other articles of copper (incl. brass): other, other",
+      "mfn_rate_pct": 3,
+      "verified": true,
+      "sources": [
+        "https://hts.usitc.gov/reststop/search?keyword=7419"
+      ],
+      "note": "Confirmed via the official USITC HTS API on 2026-11-01: 7419.80.06 / 7419.80.09 (Other articles of copper > Other > Other) General 3%. Note: 7419.80.50 (Free) is under Chain and parts thereof, not general brass articles."
+    }
+  ],
+  "context_sources": {
+    "de_minimis_suspended_2025_08_29": [
+      "https://kpmg.com/us/en/taxnewsflash/news/2025/08/us-cbp-implements-eo-suspending-duty-free-de-minimis-treatment.html",
+      "https://www.thompsonhinesmartrade.com/2025/07/president-suspends-duty-free-de-minimis-imports-for-all-countries-and-imposes-new-tariffs-on-low-value-shipments/"
+    ],
+    "suspension_upheld_2026": [
+      "https://www.troutman.com/insights/the-800-free-pass-is-gone-cit-confirms-president-can-eliminate-de-minimis-tariff-exemption/",
+      "https://dutylane.com/tariff/policy/de-minimis"
+    ],
+    "statutory_repeal_2027_07_01": [
+      "https://www.mondaq.com/unitedstates/international-trade-investment/1649458/de-minimis-to-be-eliminated-july-2027-under-recently-enacted-megabill"
+    ]
+  }
+}
