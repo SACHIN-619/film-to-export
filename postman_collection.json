@@ -1,0 +1,174 @@
+{
+  "info": {
+    "_postman_id": "film-to-export-api",
+    "name": "Film-to-Export API (PayPal AI Hackathon)",
+    "description": "Postman Collection for Film-to-Export backend endpoints, including live USITC HTS customs lookup, PayPal Orders v2 creation/capture, and DDP commercial invoice generation.",
+    "schema": "https://schema.getpostman.com/json/collection/v2.1.0/collection.json"
+  },
+  "item": [
+    {
+      "name": "Config & Health",
+      "item": [
+        {
+          "name": "Get Config",
+          "request": {
+            "method": "GET",
+            "header": [],
+            "url": {
+              "raw": "{{baseUrl}}/api/config",
+              "host": ["{{baseUrl}}"],
+              "path": ["api", "config"]
+            }
+          }
+        },
+        {
+          "name": "Health Check",
+          "request": {
+            "method": "GET",
+            "header": [],
+            "url": {
+              "raw": "{{baseUrl}}/api/health",
+              "host": ["{{baseUrl}}"],
+              "path": ["api", "health"]
+            }
+          }
+        }
+      ]
+    },
+    {
+      "name": "Broker & AI Agent",
+      "item": [
+        {
+          "name": "Replay Last Broker Run",
+          "request": {
+            "method": "POST",
+            "header": [
+              {
+                "key": "Content-Type",
+                "value": "application/json"
+              }
+            ],
+            "body": {
+              "mode": "raw",
+              "raw": "{}"
+            },
+            "url": {
+              "raw": "{{baseUrl}}/api/broker/replay",
+              "host": ["{{baseUrl}}"],
+              "path": ["api", "broker", "replay"]
+            }
+          }
+        },
+        {
+          "name": "List Recorded Broker Runs",
+          "request": {
+            "method": "GET",
+            "header": [],
+            "url": {
+              "raw": "{{baseUrl}}/api/broker/runs",
+              "host": ["{{baseUrl}}"],
+              "path": ["api", "broker", "runs"]
+            }
+          }
+        }
+      ]
+    },
+    {
+      "name": "Store & Products",
+      "item": [
+        {
+          "name": "List Shop Items",
+          "request": {
+            "method": "GET",
+            "header": [],
+            "url": {
+              "raw": "{{baseUrl}}/api/shop",
+              "host": ["{{baseUrl}}"],
+              "path": ["api", "shop"]
+            }
+          }
+        },
+        {
+          "name": "Get Shareable Pay Link",
+          "request": {
+            "method": "GET",
+            "header": [],
+            "url": {
+              "raw": "{{baseUrl}}/api/items/{{itemId}}/share",
+              "host": ["{{baseUrl}}"],
+              "path": ["api", "items", "{{itemId}}", "share"]
+            }
+          }
+        }
+      ]
+    },
+    {
+      "name": "PayPal Orders & Invoices",
+      "item": [
+        {
+          "name": "Create PayPal Order (Server-Priced DDP)",
+          "request": {
+            "method": "POST",
+            "header": [
+              {
+                "key": "Content-Type",
+                "value": "application/json"
+              }
+            ],
+            "body": {
+              "mode": "raw",
+              "raw": "{\n  \"itemId\": \"{{itemId}}\",\n  \"quantity\": 1\n}"
+            },
+            "url": {
+              "raw": "{{baseUrl}}/api/orders",
+              "host": ["{{baseUrl}}"],
+              "path": ["api", "orders"]
+            }
+          }
+        },
+        {
+          "name": "Capture & Verify PayPal Order",
+          "request": {
+            "method": "POST",
+            "header": [],
+            "url": {
+              "raw": "{{baseUrl}}/api/orders/{{orderId}}/capture",
+              "host": ["{{baseUrl}}"],
+              "path": ["api", "orders", "{{orderId}}", "capture"]
+            }
+          }
+        },
+        {
+          "name": "Download DDP Commercial Invoice PDF",
+          "request": {
+            "method": "GET",
+            "header": [],
+            "url": {
+              "raw": "{{baseUrl}}/api/invoices/{{invoiceId}}/pdf",
+              "host": ["{{baseUrl}}"],
+              "path": ["api", "invoices", "{{invoiceId}}", "pdf"]
+            }
+          }
+        }
+      ]
+    }
+  ],
+  "variable": [
+    {
+      "key": "baseUrl",
+      "value": "https://film-to-export.onrender.com"
+    },
+    {
+      "key": "itemId",
+      "value": "it_demo"
+    },
+    {
+      "key": "orderId",
+      "value": "ord_demo"
+    },
+    {
+      "key": "invoiceId",
+      "value": "inv_demo"
+    }
+  ]
+}
